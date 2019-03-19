@@ -22,6 +22,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 10; $i++) {
             $product = new Product();
             $product->setName($i);
+            $product->setSku("sku" . $i);
             $product->setPrice(rand(10, 50));
             $product->setDescription("Description du produit ".$i);
 

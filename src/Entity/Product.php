@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -17,19 +18,28 @@ class Product
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @Assert\GreaterThan(0)
      * @ORM\Column(type="float")
      */
     private $price;
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=true)
+     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=500)
      */
     private $description;
+
+    /**
+     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=255)
+     */
+    private $sku;
 
     public function getId(): ?int
     {
@@ -68,6 +78,18 @@ class Product
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getSku(): ?string
+    {
+        return $this->sku;
+    }
+
+    public function setSku(string $sku): self
+    {
+        $this->sku = $sku;
 
         return $this;
     }
